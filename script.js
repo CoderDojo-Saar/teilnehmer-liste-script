@@ -1,9 +1,15 @@
 const fs = require("fs");
 const csv = require("csv-parser");
 const args = process.argv.slice(2);
-const coderDojoNumber = args[0];
 
-const inputFilePath = "./teilnehmer.csv";
+if (args.length < 2) {
+  console.error('Too less arguments.')
+  return process.exit(1);
+}
+
+const inputFilePath = args[0];
+const coderDojoNumber = args[1];
+
 const teilnehmer = [];
 fs.createReadStream(inputFilePath)
   .pipe(
@@ -46,5 +52,5 @@ fs.createReadStream(inputFilePath)
     }
   })
   .on("end", () => {
-    console.log("done", teilnehmer);
+    console.log(teilnehmer);
   });

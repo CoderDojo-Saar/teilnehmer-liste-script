@@ -9,7 +9,7 @@ Dies bedeutet derzeit sehr viel händische Arbeit. Hier soll das Node Script hel
 ## Benutzung
 
 ```
-    node script.js <nummer des coderdojos>
+    node script.js <CSV Datei> <Nummer des coderdojos>
 ```
 
 Heraus bekommt man alle E-Mail Adressen aus der Adressspalte der CSV.
