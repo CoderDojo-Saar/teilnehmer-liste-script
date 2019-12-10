@@ -1,9 +1,17 @@
 const fs = require("fs");
+
+// CSV Parser
 const csv = require("csv-parser");
+
+// CSV Writer
+const csvWriterGenerator = require("csv-write-stream");
+const writer = csvWriterGenerator({ headers: ["Email Address"] });
+
+// Command args
 const args = process.argv.slice(2);
 
 if (args.length < 2) {
-  console.error('Too less arguments.')
+  console.error("Too less arguments.");
   return process.exit(1);
 }
 
@@ -11,6 +19,7 @@ const inputFilePath = args[0];
 const coderDojoNumber = args[1];
 
 const teilnehmer = [];
+writer.pipe(fs.createWriteStream("mailchimp.csv"));
 fs.createReadStream(inputFilePath)
   .pipe(
     csv({
@@ -49,8 +58,10 @@ fs.createReadStream(inputFilePath)
   .on("data", data => {
     if (data[coderDojoNumber] == "x") {
       teilnehmer.push(data.email);
+      writer.write([data.email]);
     }
   })
   .on("end", () => {
+    writer.end();
     console.log(teilnehmer);
   });
