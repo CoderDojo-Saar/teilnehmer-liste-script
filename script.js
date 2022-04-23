@@ -31,20 +31,23 @@ fs.createReadStream(inputFilePath)
             break;
           case 1:
             newHeader = "vorname";
-            break;
+                        break;
           case 2:
-            newHeader = "code";
+            newHeader = "geschlecht";
             break;
           case 3:
-            newHeader = "alter";
+            newHeader = "code";
             break;
           case 4:
-            newHeader = "leihlaptop";
+            newHeader = "alter";
             break;
           case 5:
-            newHeader = "email";
+            newHeader = "leihlaptop";
             break;
           case 6:
+            newHeader = "email";
+            break;
+          case 7:
             newHeader = null;
             break;
           default:
