@@ -23,8 +23,9 @@ writer.pipe(fs.createWriteStream("mailchimp.csv"));
 fs.createReadStream(inputFilePath)
   .pipe(
     csv({
-      mapHeaders: ({ header, index }) => {
-        let newHeader;
+            mapHeaders: ({ header, index }) => {
+                    console.log({header, index});
+              let newHeader;
         switch (index) {
           case 0:
             newHeader = "nachname";
@@ -37,19 +38,17 @@ fs.createReadStream(inputFilePath)
             break;
           case 3:
             newHeader = "code";
-            break;
+                        break;
           case 4:
-            newHeader = "alter";
+            newHeader = "klasse";
             break;
           case 5:
-            newHeader = "leihlaptop";
+            newHeader = "alter";
             break;
-          case 6:
-            newHeader = "email";
-            break;
-          case 7:
-            newHeader = null;
-            break;
+                case 6:
+                        newHeader = "email";
+                        console.log('email is', header);
+             break;
           default:
             newHeader = header;
             break;
@@ -58,7 +57,7 @@ fs.createReadStream(inputFilePath)
       }
     })
   )
-  .on("data", data => {
+        .on("data", data => {
     if (data[coderDojoNumber] == "x") {
       teilnehmer.push(data.email);
       writer.write([data.email]);
